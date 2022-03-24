@@ -1,0 +1,9 @@
+[flake8]
+
+max-line-length=120
+
+per-file-ignores = settings/*:F405, F403, F401
+
+exclude = .git,
+          .idea,
+          __init__.py
