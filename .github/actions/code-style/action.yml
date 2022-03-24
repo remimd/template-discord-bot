@@ -1,0 +1,12 @@
+name: Code Style
+description: Check code style
+runs:
+  using: "composite"
+  steps:
+    - name: Black
+      shell: bash
+      run: black --check ./
+
+    - name: Flake8
+      shell: bash
+      run: flake8 ./
