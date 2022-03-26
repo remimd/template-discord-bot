@@ -23,5 +23,8 @@ fi
 title "BLACK"
 black "$path"
 
+title "MYPY"
+mypy "$path"
+
 title "FLAKE"
 flake8 "$path"

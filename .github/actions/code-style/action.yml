@@ -7,6 +7,10 @@ runs:
       shell: bash
       run: black --check ./
 
+    - name: Mypy
+      shell: bash
+      run: mypy ./
+
     - name: Flake8
       shell: bash
       run: flake8 ./

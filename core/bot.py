@@ -1,4 +1,4 @@
-from base.bot import BaseBot
+from library.base_bot import BaseBot
 
 
 class Bot(BaseBot):

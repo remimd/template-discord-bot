@@ -9,7 +9,7 @@ from services.utils import logs
 
 
 class BaseBot(Bot):
-    _instance: BaseBot = None
+    _instance: BaseBot | None = None
     _slash: SlashCommand
     _token: str
 
@@ -33,7 +33,7 @@ class BaseBot(Bot):
     @classmethod
     def get_instance(cls) -> BaseBot:
         if not cls._instance:
-            cls()
+            cls._instance = cls()
         return cls._instance
 
     @staticmethod
