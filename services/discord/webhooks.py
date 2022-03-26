@@ -1,4 +1,4 @@
-from aiohttp import ClientSession
+from blacksheep.client import ClientSession
 from discord import Webhook, AsyncWebhookAdapter
 
 

@@ -1,7 +1,7 @@
-from library.base_bot import BaseBot
+from libraries.discord.base_bot import BaseBot
 
 
 class Bot(BaseBot):
-    def __init__(self):
-        super(Bot, self).__init__()
+    def __init__(self, **options):
+        super(Bot, self).__init__(**options)
         from core import commands  # noqa

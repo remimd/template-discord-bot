@@ -10,7 +10,7 @@ _logs: list[str] = []
 
 
 def display(text: str, color: str = ""):
-    _add(str(text))
+    _add(text)
     print(f"{Style.BRIGHT}{color}{text}{Fore.RESET}")
 
 

@@ -26,7 +26,12 @@ pipenv sync --dev
 Create `.env` file at the root of the project:
 
 ```dotenv
+# Discord Bot
 TOKEN=<YOUR_DISCORD_BOT_TOKEN>
+
+# API
+APP_NAME=<YOUR_APP_NAME>
+APP_VERSION=<YOUR_APP_VERSION>
 ```
 
 ### Local settings
@@ -43,8 +48,8 @@ from .dev import *  # noqa
 
 ## Usage
 
-```bash
-python main.py
-```
+Start server:
 
-> With `-l` or `--logs` you can save logs in `logs/<date>.txt`
+```bash
+uvicorn main:app
+```
