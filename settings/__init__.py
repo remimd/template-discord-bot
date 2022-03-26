@@ -3,8 +3,7 @@ import os
 from colorama import Fore
 from dotenv import load_dotenv
 
-from services import logs
-
+from services.utils import logs
 
 load_dotenv()
 

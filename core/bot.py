@@ -1,28 +1,7 @@
-from discord import Client
-
-import settings
-from services import logs
+from library.base_bot import BaseBot
 
 
-class Bot(Client):
-    _token: str
-
-    def __init__(self, **options):
-        Client.__init__(self, **options)
-        self._token = settings.TOKEN
-
-    def run(self, *args, **kwargs):
-        logs.info("Starting...")
-        if self._token:
-            args = (self._token,) + args
-            Client.run(self, *args, **kwargs)
-        else:
-            raise ValueError("Token undefined.")
-
-    async def on_ready(self):
-        logs.ok(f"{self.user.display_name} is ready")
-
-    async def close(self):
-        logs.info("Shutdown...")
-        await Client.close(self)
-        logs.ok(f"{self.user.display_name} is stopped")
+class Bot(BaseBot):
+    def __init__(self):
+        super(Bot, self).__init__()
+        from core import commands  # noqa

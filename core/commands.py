@@ -1,0 +1,11 @@
+from discord_slash import SlashContext
+
+from core.bot import Bot
+
+
+bot = Bot.get_instance()
+
+
+@bot.command(name="ping", description='Display "Pong" with latency.')
+async def _ping(ctx: SlashContext):
+    await ctx.send(content=f"Pong! `{round(ctx.bot.latency*1000)}ms`")

@@ -1,11 +1,11 @@
 from argparse import ArgumentParser, Namespace
 
 from core.bot import Bot
-from services import logs
+from services.utils import logs
 
 
 def main(save_logs: bool = False):
-    bot = Bot()
+    bot = Bot.get_instance()
     bot.run()
     if save_logs:
         logs.save()
