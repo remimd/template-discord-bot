@@ -1,3 +1,5 @@
+from typing import Callable
+
 from discord import Client
 from discord_slash import SlashCommand
 
@@ -29,3 +31,6 @@ class Bot(Client):
         logs.info("Shutdown...")
         await Client.close(self)
         logs.ok(f"{self.user.display_name} is stopped")
+
+    def command(self) -> Callable:
+        return self._slash.slash

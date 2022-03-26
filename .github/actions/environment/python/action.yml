@@ -1,5 +1,5 @@
-name: Set Up
-description: Set up the environment
+name: Python
+description: Set up Python environment
 runs:
   using: "composite"
   steps:
