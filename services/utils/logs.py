@@ -5,6 +5,7 @@ from colorama import Fore, Style
 
 from services.utils import dates
 
+
 _logs: list[str] = []
 
 
