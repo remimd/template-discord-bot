@@ -5,7 +5,7 @@ from services import logs
 
 
 def main(save_logs: bool = False):
-    bot = Bot()
+    bot = Bot.get_instance()
     bot.run()
     if save_logs:
         logs.save()
