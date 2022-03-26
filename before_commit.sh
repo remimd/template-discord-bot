@@ -2,15 +2,26 @@ bold=$(tput bold)
 reset=$(tput sgr0)
 cyan=$(tput setaf 6)
 
-path="./"
+function title {
+  if [ "$1" ]
+  then
+    entitled=$1
+  else
+    entitled="PLEASE PASS A TITLE"
+  fi
+
+  echo "${cyan}${bold}### $entitled ###${reset}"
+}
 
 if [ "$1" ]
 then
   path=$1
+else
+  path="./"
 fi
 
-echo "${cyan}${bold}### BLACK ###${reset}"
+title "BLACK"
 black "$path"
 
-echo "${cyan}${bold}### FLAKE ###${reset}"
+title "FLAKE"
 flake8 "$path"
