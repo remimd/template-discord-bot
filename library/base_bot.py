@@ -10,7 +10,7 @@ from services.utils import logs
 
 class BaseBot(Bot):
     _instance: BaseBot | None = None
-    _slash: SlashCommand
+    slash: SlashCommand
     _token: str
 
     def __new__(cls, *args, **kwargs):
@@ -24,7 +24,7 @@ class BaseBot(Bot):
         if not options.get("intents", None):
             options["intents"] = BaseBot._generate_intents()
         super(BaseBot, self).__init__("", help_command=None, **options)
-        self._slash = SlashCommand(self, sync_commands=True)
+        self.slash = SlashCommand(self, sync_commands=True)
         self._token = settings.TOKEN
 
     def __str__(self) -> str:
@@ -58,23 +58,3 @@ class BaseBot(Bot):
         logs.info("Shutdown...")
         await super(BaseBot, self).close()
         logs.ok(f"{self} is stopped")
-
-    def command(
-        self,
-        name: str,
-        description: str = None,
-        guild_ids: list[int] = None,
-        options: list[dict] = None,
-        default_permission: bool = True,
-        permissions: dict = None,
-        connector: dict = None,
-    ):
-        return self._slash.slash(
-            name=name,
-            description=description,
-            guild_ids=guild_ids,
-            options=options,
-            default_permission=default_permission,
-            permissions=permissions,
-            connector=connector,
-        )
