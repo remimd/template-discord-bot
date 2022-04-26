@@ -9,15 +9,14 @@ from services.utils import dates
 _logs: list[str] = []
 
 
-def display(text: str, color: str = ""):
+def log(message: str, state: str, color: str = ""):
+    text = f"{state.upper()}:     [{dates.now()}]: {message}"
+    styled_text = (
+        f"{Style.BRIGHT}{color}{state.upper()}{Style.RESET_ALL}:     "
+        f"[{Fore.LIGHTBLACK_EX}{dates.now()}{Style.RESET_ALL}]: {message}"
+    )
     _add(text)
-    print(f"{Style.BRIGHT}{color}{text}{Fore.RESET}")
-
-
-def log(message: str, state: str, color: str = "", title: str = None):
-    headline = f"{title.center(75, '-')}\n" if title else ""
-    text = f"{headline}[{dates.now()}] [{state.upper()}] {message}"
-    display(text, color=color)
+    print(styled_text)
 
 
 def ok(message: str):
@@ -36,9 +35,9 @@ def error(message: str):
     log(message, "error", color=Fore.RED)
 
 
-def exception(exc: BaseException, title: str = None):
+def exception(exc: BaseException):
     message = "\n".join([line.rstrip("\n") for line in traceback.format_exception(exc)])
-    log(message, "exception", color=Fore.RED, title=title)
+    log(message, "exception", color=Fore.RED)
 
 
 def _add(message: str):
@@ -52,4 +51,4 @@ def save(directory: str = "logs"):
         os.path.join(directory, f"{dates.now(dates.files_format)}.txt"), "w"
     ) as file:
         file.write("\n".join(_logs))
-    display("Logs saved", color=Fore.CYAN)
+    log("Logs saved", "logs", color=Fore.CYAN)

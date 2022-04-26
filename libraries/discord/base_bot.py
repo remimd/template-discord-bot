@@ -2,6 +2,7 @@ import asyncio
 from abc import ABC
 from typing import Optional
 
+from colorama import Fore
 from discord import Intents
 from discord.ext.commands import Bot
 from discord_slash import SlashCommand
@@ -36,6 +37,10 @@ class BaseBot(Bot, Singleton, ABC):
         intents.messages = False
         return intents
 
+    @staticmethod
+    def log(message: str):
+        logs.log(message, "discord", color=Fore.LIGHTBLUE_EX)
+
     def run_in_event_loop(self, *args, **kwargs):
         async def run():
             try:
@@ -47,7 +52,7 @@ class BaseBot(Bot, Singleton, ABC):
         asyncio.ensure_future(run(), loop=self.loop)
 
     async def start(self, *args, **kwargs):
-        logs.info("Starting...")
+        self.log("Starting...")
         if self._token:
             args = (self._token,) + args
             await super(BaseBot, self).start(*args, **kwargs)
@@ -55,12 +60,12 @@ class BaseBot(Bot, Singleton, ABC):
             raise ValueError("Token undefined.")
 
     async def on_ready(self):
-        logs.ok(f"{self} is ready")
+        self.log(f"{self} is ready")
 
     async def close(self):
-        logs.info("Shutdown...")
+        self.log("Shutdown...")
         await super(BaseBot, self).close()
-        logs.warning(f"{self} is stopped")
+        self.log(f"{self} is stopped")
 
     def check_disable(self):
         if self.disable:
