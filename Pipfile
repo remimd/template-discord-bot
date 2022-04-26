@@ -4,11 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-aiohttp = "*"
+blacksheep = "*"
 colorama = "*"
 discord = "*"
 discord-py-slash-command = "*"
 python-dotenv = "*"
+uvicorn = "*"
 
 [dev-packages]
 black = "*"

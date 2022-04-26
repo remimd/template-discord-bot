@@ -1,40 +1,33 @@
-from __future__ import annotations
+import asyncio
+from abc import ABC
+from typing import Optional
 
 from discord import Intents
 from discord.ext.commands import Bot
 from discord_slash import SlashCommand
 
 import settings
-from services.utils import logs
+from libraries.singleton import Singleton
+from services import logs
 
 
-class BaseBot(Bot):
-    _instance: BaseBot | None = None
+class BaseBot(Bot, Singleton, ABC):
+    disable: bool
     slash: SlashCommand
-    _token: str
-
-    def __new__(cls, *args, **kwargs):
-        if cls._instance:
-            raise RuntimeError(f"{cls.__name__} can only be built once.")
-        else:
-            cls._instance = super(BaseBot, cls).__new__(cls, *args, **kwargs)
-        return cls._instance
+    _token: Optional[str]
 
     def __init__(self, **options):
         if not options.get("intents", None):
             options["intents"] = BaseBot._generate_intents()
-        super(BaseBot, self).__init__("", help_command=None, **options)
+
+        Bot.__init__(self, "", help_command=None, **options)
+
+        self.disable = False
         self.slash = SlashCommand(self, sync_commands=True)
         self._token = settings.TOKEN
 
     def __str__(self) -> str:
         return self.user.display_name if self.user else self.__class__.__name__
-
-    @classmethod
-    def get_instance(cls) -> BaseBot:
-        if not cls._instance:
-            cls._instance = cls()
-        return cls._instance
 
     @staticmethod
     def _generate_intents() -> Intents:
@@ -43,11 +36,21 @@ class BaseBot(Bot):
         intents.messages = False
         return intents
 
-    def run(self, *args, **kwargs):
+    def run_in_event_loop(self, *args, **kwargs):
+        async def run():
+            try:
+                await self.start(*args, **kwargs)
+            finally:
+                if not self.is_closed():
+                    await self.close()
+
+        asyncio.ensure_future(run(), loop=self.loop)
+
+    async def start(self, *args, **kwargs):
         logs.info("Starting...")
         if self._token:
             args = (self._token,) + args
-            super(BaseBot, self).run(*args, **kwargs)
+            await super(BaseBot, self).start(*args, **kwargs)
         else:
             raise ValueError("Token undefined.")
 
@@ -57,4 +60,8 @@ class BaseBot(Bot):
     async def close(self):
         logs.info("Shutdown...")
         await super(BaseBot, self).close()
-        logs.ok(f"{self} is stopped")
+        logs.warning(f"{self} is stopped")
+
+    def check_disable(self):
+        if self.disable:
+            raise RuntimeError("Bot is disabled.")

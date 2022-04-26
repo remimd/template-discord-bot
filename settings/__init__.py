@@ -3,15 +3,13 @@ import os
 from colorama import Fore
 from dotenv import load_dotenv
 
-from services.utils import logs
+from services import logs
 
 load_dotenv()
 
-EXEC_PROFILE = os.environ.get("EXEC_PROFILE", "dev")
+EXEC_PROFILE = os.getenv("EXEC_PROFILE", "dev")
 
-logs.display(f'Profile set from "{EXEC_PROFILE.title()} Settings"', color=Fore.CYAN)
-
-match EXEC_PROFILE:
+match EXEC_PROFILE.lower():
     case "dev":
         from .dev import *  # noqa
     case "prod":
@@ -20,3 +18,5 @@ match EXEC_PROFILE:
         from .local import *  # noqa
     case _:
         raise RuntimeError("No suitable configuration found.")
+
+logs.display(f'Profile set from "{EXEC_PROFILE.title()} Settings"', color=Fore.CYAN)
