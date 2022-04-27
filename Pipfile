@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+blacksheep = "*"
+colorama = "*"
+discord = "*"
+discord-py-slash-command = "*"
+python-dotenv = "*"
+uvicorn = "*"
+
+[dev-packages]
+black = "*"
+flake8 = "*"
+mypy = "*"
+
+[requires]
+python_version = "3.10"
