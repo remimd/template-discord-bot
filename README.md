@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a Discord bot template that has the particularity of being managed by an API.
+This is a Discord bot template that has the particularity of being managed by your API.
 
 ## Dependencies
 

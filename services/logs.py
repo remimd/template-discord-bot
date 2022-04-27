@@ -10,10 +10,11 @@ _logs: list[str] = []
 
 
 def log(message: str, state: str, color: str = ""):
-    text = f"{state.upper()}:     [{dates.now()}]: {message}"
-    styled_text = (
-        f"{Style.BRIGHT}{color}{state.upper()}{Style.RESET_ALL}:     "
-        f"[{Fore.LIGHTBLACK_EX}{dates.now()}{Style.RESET_ALL}]: {message}"
+    text = _to_text(state.upper(), dates.now(), message)
+    styled_text = _to_text(
+        f"{Style.BRIGHT}{color}{state.upper()}{Style.RESET_ALL}",
+        f"{Fore.LIGHTBLACK_EX}{dates.now()}{Style.RESET_ALL}",
+        message,
     )
     _add(text)
     print(styled_text)
@@ -38,6 +39,10 @@ def error(message: str):
 def exception(exc: BaseException):
     message = "\n".join([line.rstrip("\n") for line in traceback.format_exception(exc)])
     log(message, "exception", color=Fore.RED)
+
+
+def _to_text(state: str, date: str, message: str) -> str:
+    return f"{state}:     [{date}]: {message}"
 
 
 def _add(message: str):
