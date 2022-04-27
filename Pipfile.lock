@@ -257,7 +257,7 @@
                 "sha256:fcddfe70553be717d9745990dfdb194e22ee0f60eb8f48c0794e7bfeda30d2d5",
                 "sha256:fdb9f9ed79bc6f46b021b3319184699ba1a22410a82204e6e89c774530069683"
             ],
-            "markers": "python_full_version >= '3.5.0'",
+            "markers": "python_version >= '3.5'",
             "version": "==0.4.0"
         },
         "idna": {
@@ -265,7 +265,7 @@
                 "sha256:84d9dd047ffa80596e0f246e2eab0b391788b0503584e8945f2368256d2735ff",
                 "sha256:9d643ff0a55b762d5cdb124b8eaa99c66322e2157b69160bc32796e824360e6d"
             ],
-            "markers": "python_full_version >= '3.5.0'",
+            "markers": "python_version >= '3.5'",
             "version": "==3.3"
         },
         "itsdangerous": {
