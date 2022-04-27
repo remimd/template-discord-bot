@@ -303,3 +303,6 @@ cython_debug/
 
 # Local Settings
 settings/local.py
+
+# API
+.api-key

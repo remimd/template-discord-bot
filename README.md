@@ -1,5 +1,9 @@
 # Template Discord Bot
 
+## Description
+
+This is a Discord bot template that has the particularity of being managed by an API.
+
 ## Dependencies
 
 ### Required
@@ -32,6 +36,8 @@ TOKEN=<YOUR_DISCORD_BOT_TOKEN>
 # API
 APP_NAME=<YOUR_APP_NAME>
 APP_VERSION=<YOUR_APP_VERSION>
+
+API_KEY=<YOUR_CUSTOM_API_KEY>  # Optional
 ```
 
 ### Local settings
