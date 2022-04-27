@@ -18,7 +18,9 @@ class ApiKeyAuthHandler(AuthenticationHandler):
         if self.api_key and isinstance(header_key, bytes):
             key = header_key.decode("utf-8")
             context.identity = Identity({}, "API_KEY") if key == self.api_key else None
-        else:
+        elif not self.api_key:
             context.identity = Identity({}, "PUBLIC")
+        else:
+            context.identity = None
 
         return context.identity
