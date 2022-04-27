@@ -6,7 +6,7 @@ from services.api import get_or_create_api_key
 
 
 # Discord Bot
-TOKEN = os.getenv("TOKEN", None)
+TOKEN = os.getenv("TOKEN")
 
 # API
 APP_NAME = os.getenv("APP_NAME", "Discord Bot API")
