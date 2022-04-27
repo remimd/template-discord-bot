@@ -306,3 +306,6 @@ settings/local.py
 
 # API
 .api-key
+
+# Logs
+logs/*.txt
