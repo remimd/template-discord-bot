@@ -2,7 +2,7 @@ import os
 
 from openapidocs.v3 import Info
 
-from services.api import get_or_create_api_key
+from services.utils.api_key import get_or_create_api_key
 
 
 # Discord Bot
