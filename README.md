@@ -57,5 +57,7 @@ from .dev import *  # noqa
 Start server:
 
 ```bash
-uvicorn main:app
+python main.py
 ```
+
+> With `-l` or `--logs` you can save custom logs in `logs/<date>.txt`

@@ -6,7 +6,10 @@ from core.bot import Bot
 
 
 class BotController(ApiController):
-    bot: Bot = Bot.get_instance()
+    bot: Bot
+
+    def __init__(self):
+        self.bot = Bot.get_instance()
 
     @classmethod
     def class_name(cls) -> str:
