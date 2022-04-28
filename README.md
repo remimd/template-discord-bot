@@ -50,7 +50,7 @@ from .dev import *  # noqa
 # Your code here
 ```
 
-*To use these settings, you must add this environment variable: `EXEC_PROFILE=local`*
+*To use these settings, you must add this environment variable: `EXEC_PROFILE=local`.*
 
 ## Usage
 
@@ -60,4 +60,6 @@ Start server:
 python main.py
 ```
 
-> With `-l` or `--logs` you can save custom logs in `logs/<date>.txt`
+> With `-p <PORT>` or `--port <PORT>` you can change port.
+>
+> With `-l` or `--logs` you can save custom logs in `logs/<date>.txt`.

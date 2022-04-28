@@ -13,14 +13,17 @@ async def start_bot(_):
     bot.run_in_event_loop()
 
 
-def main(save_logs: bool = False):
-    uvicorn.run(application)
+def main(port: int = 8000, save_logs: bool = False):
+    uvicorn.run(application, port=port)
     if save_logs:
         logs.save()
 
 
 def parse_arguments() -> Namespace:
     parser = ArgumentParser()
+    parser.add_argument(
+        "-p", "--port", default=8000, type=int, help="change port", dest="port"
+    )
     parser.add_argument(
         "-l", "--logs", action="store_true", help="save custom logs", dest="save_logs"
     )
