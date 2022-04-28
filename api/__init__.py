@@ -9,7 +9,7 @@ from .authentication import ApiKeyAuthHandler
 
 
 application = Application(show_error_details=settings.DEBUG)
-swagger = OpenAPIHandler(info=settings.APP_INFO)
+swagger = OpenAPIHandler(info=settings.APP_INFO, ui_path="/")
 swagger.bind_app(application)
 
 authentication = application.use_authentication()
