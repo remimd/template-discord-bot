@@ -57,7 +57,7 @@ from .dev import *  # noqa
 Start server:
 
 ```bash
-python main.py
+python main.py runserver
 ```
 
 > With `-p <PORT>` or `--port <PORT>` you can change port.

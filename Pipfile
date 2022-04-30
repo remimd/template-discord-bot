@@ -8,6 +8,8 @@ blacksheep = "*"
 colorama = "*"
 discord = "*"
 discord-py-slash-command = "*"
+django = "*"
+psycopg2 = "*"
 python-dotenv = "*"
 uvicorn = "*"
 

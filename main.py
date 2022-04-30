@@ -1,26 +1,26 @@
+import os
 from argparse import ArgumentParser, Namespace
 
-import uvicorn
-
-from api import application
-from core.discord.bot import Bot
-from services import logs
+from libraries import server
 
 
-@application.after_start
-async def start_bot(_):
-    bot = Bot.get_instance()
-    bot.run_in_event_loop()
+_commands = {
+    "makemigrations": server.makemigrations,
+    "migrate": server.migrate,
+    "runserver": server.runserver,
+}
 
 
-def main(save_logs: bool = False, **kwargs):
-    uvicorn.run(application, **kwargs)
-    if save_logs:
-        logs.save()
+def main():
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
+    args = parse_arguments().__dict__
+    command = args.pop("command")
+    _commands[command](**args)
 
 
 def parse_arguments() -> Namespace:
     parser = ArgumentParser()
+    parser.add_argument("command", choices=_commands.keys())
     parser.add_argument(
         "-p", "--port", default=8000, type=int, help="change port", dest="port"
     )
@@ -31,5 +31,4 @@ def parse_arguments() -> Namespace:
 
 
 if __name__ == "__main__":
-    args = parse_arguments()
-    main(**args.__dict__)
+    main()

@@ -16,3 +16,19 @@ APP_INFO = Info(title=APP_NAME, version=APP_VERSION)
 API_KEY = os.getenv("API_KEY", get_or_create_api_key())
 
 DEBUG = False
+
+# Django ORM
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+INSTALLED_APPS = ("core",)
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("DB_NAME", "discord_bot_api"),
+        "USER": os.getenv("DB_USER", "root"),
+        "PASSWORD": os.getenv("DB_PASSWORD", ""),
+        "HOST": os.getenv("DB_HOST", "localhost"),
+        "PORT": os.getenv("DB_PORT", 5432),
+    }
+}
