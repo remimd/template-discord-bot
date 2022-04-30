@@ -1,9 +1,8 @@
 from typing import Optional
 
 from blacksheep import Request
+from django.conf import settings
 from guardpost.asynchronous.authentication import AuthenticationHandler, Identity
-
-import settings
 
 
 class ApiKeyAuthHandler(AuthenticationHandler):

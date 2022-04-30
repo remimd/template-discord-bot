@@ -1,3 +1,5 @@
+from typing import Callable
+
 import uvicorn
 from django.core.management import execute_from_command_line
 
@@ -24,3 +26,10 @@ def runserver(save_logs: bool = False, **kwargs):
 
     if save_logs:
         logs.save()
+
+
+commands: dict[str, Callable] = {
+    "makemigrations": makemigrations,
+    "migrate": migrate,
+    "runserver": runserver,
+}

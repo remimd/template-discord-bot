@@ -6,8 +6,8 @@ from colorama import Fore
 from discord import Intents, Message
 from discord.ext.commands import Bot
 from discord_slash import SlashCommand
+from django.conf import settings
 
-import settings
 from libraries.singleton import Singleton
 from services import logs
 

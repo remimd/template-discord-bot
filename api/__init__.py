@@ -1,9 +1,9 @@
 from blacksheep import Application
 from blacksheep.server.openapi.v3 import OpenAPIHandler
 from blacksheep.server.authorization import Policy
+from django.conf import settings
 from guardpost.common import AuthenticatedRequirement
 
-import settings
 from . import controllers
 from .authentication import ApiKeyAuthHandler
 
