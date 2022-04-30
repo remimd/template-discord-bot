@@ -10,11 +10,13 @@ def main():
 
 
 def parse_arguments() -> tuple[Callable, dict]:
-    from libraries.server import commands
+    from libraries.server.manager import ServerManager
 
-    command_key = "command"
+    manager = ServerManager.get_instance()
     parser = ArgumentParser()
-    parser.add_argument(command_key, choices=commands.keys())
+
+    command_keyword = "command"
+    parser.add_argument(command_keyword, choices=manager.commands_list)
     parser.add_argument(
         "-p", "--port", default=8000, type=int, help="change port", dest="port"
     )
@@ -23,7 +25,8 @@ def parse_arguments() -> tuple[Callable, dict]:
     )
 
     kwargs = parser.parse_args().__dict__
-    command = commands[kwargs.pop(command_key)]
+    key = kwargs.pop(command_keyword)
+    command = manager.get_command(key)
 
     return command, kwargs
 
