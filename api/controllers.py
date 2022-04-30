@@ -1,8 +1,8 @@
 from blacksheep import Response
-from blacksheep.server.controllers import ApiController, post
-from blacksheep.server.responses import ok
+from blacksheep.server.controllers import ApiController, get, post
+from blacksheep.server.responses import ok, pretty_json
 
-from core.bot import Bot
+from core.discord.bot import Bot
 
 
 class BotController(ApiController):
@@ -17,15 +17,11 @@ class BotController(ApiController):
 
     @classmethod
     def route(cls) -> str:
-        return "api"
+        return "bot"
 
-    @post("/unable")
-    def unable(self) -> Response:
-        if not self.bot.disable:
-            return Response(status=304)
-
-        self.bot.disable = False
-        return ok()
+    @get("/disable")
+    def is_disable(self) -> Response:
+        return pretty_json({"value": self.bot.disable})
 
     @post("/disable")
     def disable(self) -> Response:
@@ -33,4 +29,16 @@ class BotController(ApiController):
             return Response(status=304)
 
         self.bot.disable = True
+        return ok()
+
+    @get("/unable")
+    def is_unable(self) -> Response:
+        return pretty_json({"value": not self.bot.disable})
+
+    @post("/unable")
+    def unable(self) -> Response:
+        if not self.bot.disable:
+            return Response(status=304)
+
+        self.bot.disable = False
         return ok()

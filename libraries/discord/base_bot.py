@@ -3,7 +3,7 @@ from abc import ABC
 from typing import Optional
 
 from colorama import Fore
-from discord import Intents
+from discord import Intents, Message
 from discord.ext.commands import Bot
 from discord_slash import SlashCommand
 
@@ -18,11 +18,10 @@ class BaseBot(Bot, Singleton, ABC):
     _token: Optional[str]
 
     def __init__(self, **options):
-        if not options.get("intents", None):
-            options["intents"] = BaseBot._generate_intents()
+        if not options.get("intents"):
+            options["intents"] = BaseBot.generate_intents()
 
-        Bot.__init__(self, "", help_command=None, **options)
-
+        super(BaseBot, self).__init__("💻", help_command=None, **options)
         self.disable = False
         self.slash = SlashCommand(self, sync_commands=True)
         self._token = settings.TOKEN
@@ -31,10 +30,10 @@ class BaseBot(Bot, Singleton, ABC):
         return self.user.display_name if self.user else self.__class__.__name__
 
     @staticmethod
-    def _generate_intents() -> Intents:
+    def generate_intents() -> Intents:
         intents = Intents.default()
         intents.members = True
-        intents.messages = False
+        intents.presences = True
         return intents
 
     @staticmethod
@@ -66,6 +65,12 @@ class BaseBot(Bot, Singleton, ABC):
         self.log("Shutdown...")
         await super(BaseBot, self).close()
         self.log(f"{self} is stopped")
+
+    async def on_message(self, message: Message):
+        pass
+
+    def command(self, *args, **kwargs):
+        raise RuntimeError("This function is outdated, use 'bot.slash.slash'.")
 
     def check_disable(self):
         if self.disable:

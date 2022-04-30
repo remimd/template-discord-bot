@@ -1,6 +1,6 @@
 from discord_slash import SlashContext
 
-from core.bot import Bot
+from core.discord.bot import Bot
 
 
 bot = Bot.get_instance()

@@ -1,5 +1,5 @@
 from blacksheep.client import ClientSession
-from discord import Webhook, AsyncWebhookAdapter
+from discord import AsyncWebhookAdapter, Webhook
 
 
 async def send(webhook_url: str, **kwargs):

@@ -3,7 +3,7 @@ from argparse import ArgumentParser, Namespace
 import uvicorn
 
 from api import application
-from core.bot import Bot
+from core.discord.bot import Bot
 from services import logs
 
 
@@ -13,8 +13,8 @@ async def start_bot(_):
     bot.run_in_event_loop()
 
 
-def main(port: int = 8000, save_logs: bool = False):
-    uvicorn.run(application, port=port)
+def main(save_logs: bool = False, **kwargs):
+    uvicorn.run(application, **kwargs)
     if save_logs:
         logs.save()
 

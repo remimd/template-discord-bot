@@ -7,18 +7,14 @@ import settings
 
 
 class ApiKeyAuthHandler(AuthenticationHandler):
-    api_key: str
-
-    def __init__(self):
-        self.api_key = settings.API_KEY
-
     async def authenticate(self, context: Request) -> Optional[Identity]:
-        header_key = context.get_first_header(b"api-key")
+        header_key = context.get_first_header(b"x-api-key")
+        api_key = settings.API_KEY
 
-        if self.api_key and isinstance(header_key, bytes):
+        if api_key and isinstance(header_key, bytes):
             key = header_key.decode("utf-8")
-            context.identity = Identity({}, "API_KEY") if key == self.api_key else None
-        elif not self.api_key:
+            context.identity = Identity({}, "API_KEY") if key == api_key else None
+        elif not api_key:
             context.identity = Identity({}, "PUBLIC")
         else:
             context.identity = None
