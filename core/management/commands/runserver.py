@@ -8,7 +8,7 @@ from services import logs
 
 
 class Command(BaseRunServerCommand):
-    default_port = 8000
+    default_port: int = 8000
 
     def add_arguments(self, parser: CommandParser):
         parser.add_argument(

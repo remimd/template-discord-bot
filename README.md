@@ -8,7 +8,7 @@ This is a Discord bot template that has the particularity of being managed by yo
 
 * **Discord**
 * **Discord Slash Command**
-* **BlackSheep API**
+* **BlackSheep**
 * **Django ORM**
 
 ## Dependencies
