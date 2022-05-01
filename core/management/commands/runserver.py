@@ -42,7 +42,7 @@ class Command(BaseRunServerCommand):
 
     def handle(self, *args, **options):
         uvicorn_options = self.parse_uvicorn_options(**options)
-        uvicorn.run("api:application", **uvicorn_options)
+        uvicorn.run("core:application", **uvicorn_options)
 
         if options.get("save_logs"):
             logs.save()
