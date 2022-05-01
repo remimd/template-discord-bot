@@ -1,0 +1,17 @@
+name: Python
+description: Set up Python environment
+runs:
+  using: "composite"
+  steps:
+    - name: Install Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.10'
+        architecture: 'x64'
+
+    - name: Install Pipenv & Dependancies
+      shell: bash
+      run: |
+        pip install --upgrade pip
+        pip install --upgrade pipenv
+        pipenv install --dev --deploy --system

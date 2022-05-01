@@ -1,0 +1,7 @@
+name: Environment
+description: Set up the environment
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Python environment
+      uses: ./.github/actions/environment/python
