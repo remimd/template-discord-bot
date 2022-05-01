@@ -4,12 +4,20 @@
 
 This is a Discord bot template that has the particularity of being managed by your API.
 
+### Merge of:
+
+* **Discord**
+* **Discord Slash Command**
+* **BlackSheep**
+* **Django ORM**
+
 ## Dependencies
 
 ### Required
 
 * **Python 3.10**
 * [**Pipenv**](https://github.com/pypa/pipenv)
+* **PostgreSQL**
 
 ### Recommended
 
@@ -21,6 +29,22 @@ This is a Discord bot template that has the particularity of being managed by yo
 
 ```bash
 pipenv sync --dev
+```
+
+***Basic usage of pipenv***
+
+* *Start shell environment:*
+
+```bash
+pipenv shell
+```
+
+### Database
+
+If you don't have PostgreSQL installed, you can use Docker:
+
+```bash
+docker-compose up -d
 ```
 
 ## Configuration
@@ -38,6 +62,21 @@ APP_NAME=<YOUR_APP_NAME>
 APP_VERSION=<YOUR_APP_VERSION>
 
 API_KEY=<YOUR_CUSTOM_API_KEY>  # Optional
+
+# Django ORM
+DB_NAME=<YOUR_DATABASE_NAME>
+DB_USER=<YOUR_DATABASE_USER>
+DB_PASSWORD=<YOUR_DATABASE_PASSWORD>
+DB_HOST=<YOUR_DATABASE_HOST>
+DB_PORT=<YOUR_DATABASE_PORT>
+```
+
+### Initialize Database
+
+*Reset database and apply migrations.*
+
+```bash
+python main.py init_bdd
 ```
 
 ### Local settings
@@ -57,9 +96,11 @@ from .dev import *  # noqa
 Start server:
 
 ```bash
-python main.py
+python main.py runserver
 ```
 
+> With `-r` or `--reload` you can activate the automatic reloading at each modification.
+>
 > With `-p <PORT>` or `--port <PORT>` you can change port.
 >
 > With `-l` or `--logs` you can save custom logs in `logs/<date>.txt`.
