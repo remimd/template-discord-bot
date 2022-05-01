@@ -4,6 +4,7 @@ from blacksheep.server.authorization import Policy
 from django.conf import settings
 from guardpost.common import AuthenticatedRequirement
 
+from core.discord.bot import Bot
 from . import controllers
 from .authentication import ApiKeyAuthHandler
 
@@ -17,3 +18,9 @@ authentication.add(ApiKeyAuthHandler())
 
 authorization = application.use_authorization()
 authorization.default_policy = Policy("authenticated", AuthenticatedRequirement())
+
+
+@application.after_start
+async def start_bot(_):
+    bot = Bot.get_instance()
+    bot.run_in_event_loop()

@@ -8,7 +8,7 @@ This is a Discord bot template that has the particularity of being managed by yo
 
 * **Discord**
 * **Discord Slash Command**
-* **Blacksheep API**
+* **BlackSheep API**
 * **Django ORM**
 
 ## Dependencies
@@ -99,6 +99,8 @@ Start server:
 python main.py runserver
 ```
 
+> With `-r` or `--reload` you can activate the automatic reloading at each modification.
+>
 > With `-p <PORT>` or `--port <PORT>` you can change port.
 >
 > With `-l` or `--logs` you can save custom logs in `logs/<date>.txt`.
