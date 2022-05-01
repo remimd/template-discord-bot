@@ -18,8 +18,6 @@ API_KEY = os.getenv("API_KEY", get_or_create_api_key())
 DEBUG = False
 
 # Django ORM
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
 INSTALLED_APPS = ("django_extensions", "core")
 
 DATABASES = {
@@ -32,3 +30,5 @@ DATABASES = {
         "PORT": os.getenv("DB_PORT", 5432),
     }
 }
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
