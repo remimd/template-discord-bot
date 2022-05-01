@@ -1,0 +1,18 @@
+version: "3.1"
+
+services:
+  db:
+    image: postgres
+    container_name: PostgreSQL
+    restart: always
+    environment:
+      POSTGRES_DB: discord_bot_api
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    volumes:
+      - discord_bot_api:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  discord_bot_api:
