@@ -3,7 +3,7 @@ from typing import Callable, Iterable
 from libraries.singleton import Singleton
 
 
-class ServerManager(Singleton):
+class Manager(Singleton):
     _commands: dict[str, Callable]
 
     def __init__(self):
@@ -22,3 +22,6 @@ class ServerManager(Singleton):
 
     def command(self, function: Callable):
         self.add_command(function.__name__, function)
+
+    def call_command(self, command_name: str, **kwargs):
+        self.get_command(command_name)(**kwargs)

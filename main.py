@@ -6,13 +6,16 @@ from typing import Callable
 def main():
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
     command, kwargs = parse_arguments()
-    command(**kwargs)
+    try:
+        command(**kwargs)
+    except TypeError:
+        command()
 
 
 def parse_arguments() -> tuple[Callable, dict]:
-    from libraries.server.manager import ServerManager
+    from core.management.manager import Manager
 
-    manager = ServerManager.get_instance()
+    manager = Manager.get_instance()
     parser = ArgumentParser()
 
     command_keyword = "command"
@@ -25,8 +28,8 @@ def parse_arguments() -> tuple[Callable, dict]:
     )
 
     kwargs = parser.parse_args().__dict__
-    key = kwargs.pop(command_keyword)
-    command = manager.get_command(key)
+    command_name = kwargs.pop(command_keyword)
+    command = manager.get_command(command_name)
 
     return command, kwargs
 

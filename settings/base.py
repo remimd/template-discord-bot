@@ -20,7 +20,7 @@ DEBUG = False
 # Django ORM
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-INSTALLED_APPS = ("core",)
+INSTALLED_APPS = ("django_extensions", "core")
 
 DATABASES = {
     "default": {
