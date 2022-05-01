@@ -1,3 +1,4 @@
+import inspect
 from typing import Any
 
 import uvicorn
@@ -34,15 +35,19 @@ class Command(BaseRunServerCommand):
             dest="reload",
         )
 
-    def parse_uvicorn_options(self, **options) -> dict[str, Any]:
-        return {
-            "port": options.get("port") or self.default_port,
-            "reload": options.get("reload") or False,
-        }
-
     def handle(self, *args, **options):
         uvicorn_options = self.parse_uvicorn_options(**options)
         uvicorn.run("core:application", **uvicorn_options)
 
         if options.get("save_logs"):
             logs.save()
+
+    @staticmethod
+    def parse_uvicorn_options(**options) -> dict[str, Any]:
+        signature = inspect.signature(uvicorn.Config)
+        keys = [
+            parameter.name
+            for parameter in signature.parameters.values()
+            if parameter.kind == parameter.POSITIONAL_OR_KEYWORD
+        ]
+        return {key: value for key in keys if (value := options.get(key)) is not None}
