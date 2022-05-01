@@ -34,10 +34,10 @@ class Command(BaseRunServerCommand):
             bot.run_in_event_loop()
 
         uvicorn_options = {
-            "port": options["port"] or self.default_port,
+            "port": options.get("port") or self.default_port,
         }
 
         uvicorn.run(application, **uvicorn_options)
 
-        if options["save_logs"]:
+        if options.get("save_logs"):
             logs.save()
