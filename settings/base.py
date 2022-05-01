@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from openapidocs.v3 import Info
 
@@ -18,6 +19,8 @@ API_KEY = os.getenv("API_KEY", get_or_create_api_key())
 DEBUG = False
 
 # Django ORM
+BASE_DIR = Path(__file__).parent.parent
+
 INSTALLED_APPS = ("django_extensions", "core")
 
 DATABASES = {
