@@ -30,6 +30,11 @@ authorization.default_policy = Policy("authenticated", AuthenticatedRequirement(
 application.mount("/django", django_application)
 
 
+@application.on_start
+async def import_controllers(_):
+    from api import controllers  # noqa
+
+
 @application.after_start
 async def start_bot(_):
     bot = Bot.get_instance()

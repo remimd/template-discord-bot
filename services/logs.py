@@ -4,7 +4,7 @@ import traceback
 
 from colorama import Fore, Style
 
-from services.utils import date
+from services.utils.date import Format, now
 
 
 _logger = logging.getLogger("custom_logs")
@@ -12,10 +12,10 @@ _logs: list[str] = []
 
 
 def log(message: str, state: str, color: str = "", level: int = logging.INFO):
-    text = _to_text(state.upper(), date.now(), message)
+    text = _to_text(state.upper(), now(), message)
     styled_text = _to_text(
         f"{Style.BRIGHT}{color}{state.upper()}{Style.RESET_ALL}",
-        f"{Fore.LIGHTBLACK_EX}{date.now()}{Style.RESET_ALL}",
+        f"{Fore.LIGHTBLACK_EX}{now()}{Style.RESET_ALL}",
         message,
     )
     _logger.log(level, text)
@@ -55,8 +55,6 @@ def _add(message: str):
 def save(directory: str = "logs"):
     if not os.path.exists(directory):
         os.mkdir(directory)
-    with open(
-        os.path.join(directory, f"{date.now(date.Format.FILE)}.txt"), "w"
-    ) as file:
+    with open(os.path.join(directory, f"{now(format=Format.FILE)}.txt"), "w") as file:
         file.write("\n".join(_logs))
     log("Logs saved", "logs", color=Fore.CYAN)
