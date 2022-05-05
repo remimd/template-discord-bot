@@ -1,5 +1,3 @@
-import os
-
 from blacksheep import Application
 from blacksheep.server.openapi.v3 import OpenAPIHandler
 from blacksheep.server.authorization import Policy
@@ -7,18 +5,25 @@ from django.conf import settings
 from django.core.asgi import get_asgi_application
 from guardpost.common import AuthenticatedRequirement
 
-from core.discord.bot import Bot
 from api.authentication import ApiKeyAuthHandler
+from core.discord.bot import Bot
+from services.environment import set_environment
 
 
 # Django
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
+set_environment()
+
 django_application = get_asgi_application()
 
 
 # BlackSheep
 application = Application(show_error_details=settings.DEBUG)
-swagger = OpenAPIHandler(info=settings.APP_INFO, ui_path="/")
+
+swagger = OpenAPIHandler(
+    info=settings.APP_INFO,
+    anonymous_access=settings.DEBUG,
+    ui_path="/",
+)
 swagger.bind_app(application)
 
 authentication = application.use_authentication()
