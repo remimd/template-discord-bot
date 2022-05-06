@@ -11,7 +11,7 @@ discord = "*"
 discord-py-slash-command = "*"
 django = "*"
 django-extensions = "*"
-psycopg2 = "*"
+psycopg2-binary = "*"
 python-dotenv = "*"
 uvicorn = "*"
 
