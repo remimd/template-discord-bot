@@ -8,7 +8,7 @@ from discord.ext.commands import Bot
 from discord_slash import SlashCommand
 from django.conf import settings
 
-from libraries.singleton import Singleton
+from common.singleton import Singleton
 from services import logs
 
 

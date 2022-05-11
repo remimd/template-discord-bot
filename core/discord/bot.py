@@ -1,4 +1,4 @@
-from libraries.discord.base_bot import BaseBot
+from common.discord.base_bot import BaseBot
 
 
 class Bot(BaseBot):

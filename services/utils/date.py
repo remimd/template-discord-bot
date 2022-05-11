@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from libraries.static_class import StaticClass
+from common.static_class import StaticClass
 
 
 class Format(StaticClass):
