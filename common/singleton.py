@@ -15,7 +15,7 @@ class Singleton(ABC):
         with _lock:
             if cls._instance:
                 raise RuntimeError(f"{cls.__name__} can only be built once.")
-            cls._instance = super(Singleton, cls).__new__(cls)
+            cls._instance = super(Singleton, cls).__new__(cls, *args, **kwargs)
         return cls._instance
 
     @classmethod

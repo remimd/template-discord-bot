@@ -19,7 +19,7 @@ class AbstractTask(ABC):
     name: str
 
     def __new__(cls, *args, **kwargs):
-        instance = super(AbstractTask, cls).__new__(cls)
+        instance = super(AbstractTask, cls).__new__(cls, *args, **kwargs)
         _tasks_list.append(instance)
         return instance
 
