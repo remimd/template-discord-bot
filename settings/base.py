@@ -3,7 +3,7 @@ from pathlib import Path
 
 from openapidocs.v3 import Info
 
-from services.utils import key
+from services.utils import key as key_service
 
 
 # Discord Bot
@@ -14,7 +14,7 @@ APP_NAME = os.getenv("APP_NAME", "Discord Bot API")
 APP_VERSION = os.getenv("APP_VERSION", "1.0")
 APP_INFO = Info(title=APP_NAME, version=APP_VERSION)
 
-API_KEY = os.getenv("API_KEY", key.get_or_create_api_key())
+API_KEY = os.getenv("API_KEY", key_service.get_or_create_api_key())
 
 DEBUG = False
 
@@ -36,6 +36,4 @@ DATABASES = {
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-SECRET_KEY = key.get_or_create_secret_key()
-
-ROOT_URLCONF = "core.urls"
+SECRET_KEY = key_service.get_or_create_secret_key()

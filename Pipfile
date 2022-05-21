@@ -13,6 +13,8 @@ django = "*"
 django-extensions = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
+pytz = "*"
+types-pytz = "*"
 uvicorn = "*"
 
 [dev-packages]
