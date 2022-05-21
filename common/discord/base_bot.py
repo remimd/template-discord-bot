@@ -18,9 +18,7 @@ class BaseBot(Bot, Singleton, ABC):
     _token: Optional[str]
 
     def __init__(self, **options):
-        if not options.get("intents"):
-            options["intents"] = BaseBot.generate_intents()
-
+        options.setdefault("intents", Intents.all())
         super(BaseBot, self).__init__("💻", help_command=None, **options)
         self.disable = False
         self.slash = SlashCommand(self, sync_commands=True)
@@ -28,13 +26,6 @@ class BaseBot(Bot, Singleton, ABC):
 
     def __str__(self) -> str:
         return self.user.display_name if self.user else self.__class__.__name__
-
-    @staticmethod
-    def generate_intents() -> Intents:
-        intents = Intents.default()
-        intents.members = True
-        intents.presences = True
-        return intents
 
     @staticmethod
     def log(message: str):

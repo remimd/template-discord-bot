@@ -5,6 +5,7 @@ from django.conf import settings
 from guardpost.common import AuthenticatedRequirement
 
 from api.authentication import ApiKeyAuthHandler
+from common.task import get_tasks_list
 from core.discord.bot import Bot
 
 
@@ -33,3 +34,12 @@ async def import_controllers(_):
 async def start_bot(_):
     bot = Bot.get_instance()
     bot.run_in_event_loop()
+
+
+@application.after_start
+async def start_tasks(_):
+    from . import tasks  # noqa
+
+    tasks_list = get_tasks_list()
+    for task in tasks_list:
+        task.start()
