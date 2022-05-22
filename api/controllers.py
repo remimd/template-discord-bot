@@ -20,7 +20,7 @@ class BotController(ApiController):
         return "bot"
 
     @get("/disable")
-    def is_disable(self) -> Response:
+    def is_disabled(self) -> Response:
         return pretty_json({"value": self.bot.disable})
 
     @post("/disable")
@@ -31,12 +31,12 @@ class BotController(ApiController):
         self.bot.disable = True
         return ok()
 
-    @get("/unable")
-    def is_unable(self) -> Response:
+    @get("/enable")
+    def is_enabled(self) -> Response:
         return pretty_json({"value": not self.bot.disable})
 
-    @post("/unable")
-    def unable(self) -> Response:
+    @post("/enable")
+    def enable(self) -> Response:
         if not self.bot.disable:
             return not_modified()
 
