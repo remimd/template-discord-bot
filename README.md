@@ -76,7 +76,7 @@ DB_PORT=<YOUR_DATABASE_PORT>
 *Reset database and apply migrations.*
 
 ```bash
-python main.py init_bdd
+python manage.py init_bdd
 ```
 
 ### Local settings
@@ -96,7 +96,7 @@ from .dev import *  # noqa
 Start server:
 
 ```bash
-python main.py runserver
+python manage.py runserver
 ```
 
 > With `-r` or `--reload` you can activate the automatic reloading at each modification.
