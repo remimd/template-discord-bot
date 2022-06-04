@@ -3,7 +3,7 @@ from pathlib import Path
 
 from openapidocs.v3 import Info
 
-from services.utils import key as key_service
+from services.utils import key_service
 
 
 # Discord Bot

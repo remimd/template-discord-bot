@@ -4,7 +4,7 @@ import traceback
 
 from colorama import Fore, Style
 
-from services.utils.date import Format, now
+from services.utils.date_service import Format, now
 
 
 _logger = logging.getLogger("custom_logs")
