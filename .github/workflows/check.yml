@@ -9,6 +9,15 @@ jobs:
   check:
     name: Checker
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_DB: discord_bot_api
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: root
+
     steps:
       - name: Run checkout
         uses: actions/checkout@v3
