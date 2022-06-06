@@ -25,5 +25,8 @@ jobs:
       - name: Set up environment
         uses: ./.github/actions/environment
 
+      - name: Django
+        uses: ./.github/actions/django
+
       - name: Check code style
         uses: ./.github/actions/code-style
