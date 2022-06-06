@@ -13,5 +13,5 @@ runs:
       shell: bash
       run: |
         pip install --upgrade pip
-        pip install --upgrade pipenv
+        pip install pipenv
         pipenv install --dev --deploy --system

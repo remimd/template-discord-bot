@@ -1,0 +1,12 @@
+name: Django
+description: Set up Django
+runs:
+  using: "composite"
+  steps:
+    - name: Makemigrations
+      shell: bash
+      run: python manage.py makemigrations --check --dry-run
+
+    - name: Migrate
+      shell: bash
+      run: python manage.py migrate

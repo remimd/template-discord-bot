@@ -20,6 +20,9 @@ else
   path="./"
 fi
 
+title "DJANGO"
+python manage.py makemigrations --check --dry-run
+
 title "BLACK"
 black "$path"
 
