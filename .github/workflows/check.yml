@@ -9,6 +9,7 @@ jobs:
   check:
     name: Checker
     runs-on: ubuntu-latest
+    container: Discord Bot API
     env:
       EXEC_PROFILE: prod
 
