@@ -9,6 +9,8 @@ jobs:
   check:
     name: Checker
     runs-on: ubuntu-latest
+    env:
+      EXEC_PROFILE: prod
 
     services:
       postgres:
