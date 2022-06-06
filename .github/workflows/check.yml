@@ -9,13 +9,14 @@ jobs:
   check:
     name: Checker
     runs-on: ubuntu-latest
-    container: Discord Bot API
     env:
       EXEC_PROFILE: prod
 
     services:
-      postgres:
+      db:
         image: postgres
+        container_name: PostgreSQL
+        restart: always
         env:
           POSTGRES_DB: discord_bot_api
           POSTGRES_USER: root
@@ -25,6 +26,8 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports:
+          - 5432:5432
 
     steps:
       - name: Run checkout
