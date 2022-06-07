@@ -9,12 +9,33 @@ jobs:
   check:
     name: Checker
     runs-on: ubuntu-latest
+    env:
+      EXEC_PROFILE: prod
+
+    services:
+      db:
+        image: postgres
+        env:
+          POSTGRES_DB: discord_bot_api
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: root
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
     steps:
       - name: Run checkout
         uses: actions/checkout@v3
 
       - name: Set up environment
         uses: ./.github/actions/environment
+
+      - name: Django
+        uses: ./.github/actions/django
 
       - name: Check code style
         uses: ./.github/actions/code-style
