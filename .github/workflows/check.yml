@@ -16,7 +16,6 @@ jobs:
       db:
         image: postgres
         container_name: PostgreSQL
-        restart: always
         env:
           POSTGRES_DB: discord_bot_api
           POSTGRES_USER: root
