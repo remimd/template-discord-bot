@@ -13,7 +13,7 @@ jobs:
       EXEC_PROFILE: prod
 
     services:
-      db:
+      postgres:
         image: postgres
         container_name: PostgreSQL
         env:
