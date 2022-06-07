@@ -13,9 +13,8 @@ jobs:
       EXEC_PROFILE: prod
 
     services:
-      postgres:
+      db:
         image: postgres
-        container_name: PostgreSQL
         env:
           POSTGRES_DB: discord_bot_api
           POSTGRES_USER: root
