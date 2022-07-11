@@ -2,13 +2,22 @@ from blacksheep import Application
 from blacksheep.server.openapi.v3 import OpenAPIHandler
 from blacksheep.server.authorization import Policy
 from django.conf import settings
+from django.core.asgi import get_asgi_application
 from guardpost.common import AuthenticatedRequirement
 
 from api.authentication import ApiKeyAuthHandler
 from common.task import get_tasks_list
 from core.discord.bot import Bot
+from services.environment import set_environment
 
 
+# Django
+set_environment()
+
+django_application = get_asgi_application()
+
+
+# BlackSheep
 application = Application(show_error_details=settings.DEBUG)
 
 swagger = OpenAPIHandler(
