@@ -14,6 +14,7 @@ django-extensions = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
 pytz = "*"
+serpy = "*"
 types-pytz = "*"
 uvicorn = "*"
 
