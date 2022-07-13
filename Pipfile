@@ -4,10 +4,10 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-aiohttp = "*"
+aiohttp = ">= 3.7.4, < 3.8"
 blacksheep = "*"
 colorama = "*"
-discord = "*"
+discord = ">= 1.7.3"
 discord-py-slash-command = "*"
 django = "*"
 django-extensions = "*"
